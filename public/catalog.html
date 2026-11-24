@@ -12,6 +12,7 @@
     :root {
       --primary: hsl(33, 43%, 54%);
       --primary-light: hsl(33, 38%, 60%);
+      --white: #ffffff;
       --bg: hsl(0, 0%, 100%);
       --text: hsl(0, 0%, 13%);
       --text-muted: hsl(0, 0%, 40%);
@@ -203,6 +204,20 @@
       border-radius: 5px;
       cursor: pointer;
       min-height: 220px;
+      transition: transform 0.25s;
+    }
+    .tour-card:focus-visible,
+    .vip-card[data-tour-id]:focus-visible {
+      outline: 3px solid var(--primary);
+      outline-offset: 3px;
+    }
+    .vip-card[data-tour-id] {
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .vip-card[data-tour-id]:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
     }
     .tour-card img {
       width: 100%;
@@ -501,6 +516,7 @@
       .footer-cols { grid-template-columns: 1fr; gap: 20px; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 
 <body>
@@ -508,8 +524,8 @@
   <header class="header">
     <div class="container">
       <a href="index.html" class="logo">
-        <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
-        <div class="logo-text">
+       <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+         <div class="logo-text">
           <div class="logo-title">ВАНДРАЛЮБЫ</div>
           <div class="logo-sub">Турагентство</div>
         </div>
@@ -517,7 +533,7 @@
       <nav class="nav">
         <a href="index.html">Главная</a>
         <a href="about.html">Вандралюбы</a>
-        <a href="#" class="active">Каталог</a>
+        <a href="catalog.html" class="active">Каталог</a>
         <a href="travelers.html">Туристам</a>
         <a href="contacts.html">Контакты</a>
       </nav>
@@ -526,10 +542,12 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           тел. +375 29 245 17 70
         </a>
-        <a href="registration.html">
-        <button class="arrow-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button></a>
+        <!-- Кнопка входа/кабинет -->
+        <a href="login.html" id="authLink">
+          <button class="arrow-btn" id="authBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </a>
       </div>
     </div>
   </header>
@@ -550,7 +568,7 @@
     <!-- Main grid: 3 columns, pushcha is tall spanning 2 rows -->
     <div class="tours-grid">
       <!-- Беловежская пуща — tall card -->
-      <div class="tour-card tour-tall">
+      <div class="tour-card tour-tall" data-tour-id="pushcha">
         <img src="belovezhskaya_pushcha.jpg" alt="Беловежская пуща">
         <div class="tour-card-overlay"></div>
         <div class="tour-card-label">
@@ -561,7 +579,7 @@
         <div class="tour-card-price">от 550 BYN</div>
       </div>
       <!-- Классика Гродно -->
-      <div class="tour-card">
+      <div class="tour-card" data-tour-id="grodno-classic">
         <img src="grodno.jpg" alt="Гродно">
         <div class="tour-card-overlay"></div>
         <div class="tour-card-label">
@@ -572,7 +590,7 @@
         <div class="tour-card-price">от 410 BYN</div>
       </div>
       <!-- Полесье -->
-      <div class="tour-card">
+      <div class="tour-card" data-tour-id="polessye-river">
         <img src="polessye.jpg" alt="Полесье">
         <div class="tour-card-overlay"></div>
         <div class="tour-card-label">
@@ -583,7 +601,7 @@
         <div class="tour-card-price">от 620 BYN</div>
       </div>
       <!-- Гранитный каньон -->
-      <div class="tour-card">
+      <div class="tour-card" data-tour-id="granite-canyon">
         <img src="canyon.jpg" alt="Гранитный каньон">
         <div class="tour-card-overlay"></div>
         <div class="tour-card-label">
@@ -594,7 +612,7 @@
         <div class="tour-card-price">от 520 BYN</div>
       </div>
       <!-- Белорусские мальдивы -->
-      <div class="tour-card">
+      <div class="tour-card" data-tour-id="belarus-maldives">
         <img src="chalk_quarries.jpg" alt="Белорусские мальдивы">
         <div class="tour-card-overlay"></div>
         <div class="tour-card-label">
@@ -606,7 +624,7 @@
       </div>
     </div>
     <!-- Wide cheese card -->
-    <div class="tour-card tour-wide" style="margin-bottom: 0;">
+    <div class="tour-card tour-wide" data-tour-id="cheese-story" style="margin-bottom: 0;">
       <img src="cheese.jpg" alt="Сырная история">
       <div class="tour-card-overlay"></div>
       <div class="tour-card-label">
@@ -622,7 +640,7 @@
     <h2>Топ 3 VIP-экскурсии</h2>
     <div class="vip-grid">
       <!-- Гастрономическое -->
-      <div class="vip-card">
+      <div class="vip-card" data-tour-id="vip-gastro">
         <div class="vip-card-text">
           <h3>Гастрономическое путешествие вкусов и традиций</h3>
           <p>Беларусь может удивить изысканной кухней. Этот тур создан для тех, кто ценит редкие продукты, авторскую подачу и аутентичные рецепты в самом роскошном исполнении.</p>
@@ -633,7 +651,7 @@
         </div>
       </div>
       <!-- Княжеский -->
-      <div class="vip-card">
+      <div class="vip-card" data-tour-id="vip-prince">
         <div class="vip-card-text">
           <h3>Княжеский прием: замки и усадьбы</h3>
           <p>Это путешествие перенесёт вас в эпоху Радзивиллов, Сапегов и Тышкевичей. Вы будете жить в замках, обедать во дворцах, прикасаться к истории, которую показывают в музеях.</p>
@@ -644,7 +662,7 @@
         </div>
       </div>
       <!-- Энергия земли -->
-      <div class="vip-card">
+      <div class="vip-card" data-tour-id="vip-energy">
         <div class="vip-card-text">
           <h3>Энергия земли. Эксклюзивный ретрит в местах силы</h3>
           <p>Для тех, кто ищет не просто путешествие, а глубокую трансформацию. Мы соберём для вас индивидуальный маршрут по сакральным местам Беларуси, где всё может измениться, а энергия земли перезарядит изнутри.</p>
@@ -680,32 +698,83 @@
   </section>
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-logo">
-      <div class="footer-logo-inner">
-         <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+    <div class="container">
+      <div class="footer-logo">
+        <div class="footer-logo-inner">
+           <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
         <div>
-          <div class="footer-logo-text">Вандралюбы</div>
-          <div class="footer-logo-sub">Турагентство</div>
+            <div class="footer-logo-text">Вандралюбы</div>
+            <div class="footer-logo-sub">Турагентство</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer-cols">
-      <div>
-        <strong>ЧУП "Вандралюбы"</strong>
-        <p>© 2026. Все права защищены</p>
-        <a href="#">Политика конфиденциальности</a>
+      <div class="footer-grid">
+        <!-- Столбец 1: Меню -->
+        <div>
+          
+          <a href="index.html">Главная</a><br>
+          <a href="about.html">Вандралюбы</a><br>
+          <a href="catalog.html">Каталог</a><br>
+          <a href="travelers.html">Туристам</a><br>
+          <a href="contacts.html">Контакты</a><br>
+          <a href="login.html">Вход в личный кабинет</a>
+        </div>
+        <!-- Столбец 2: Контакты -->
+        <div>
+          <p class="label">Свяжитесь с нами</p>
+          <a href="tel:+375292451770">тел. +375 29 245 17 70</a><br>
+          <a href="mailto:vandraluby@gmail.com">e-mail: vandraluby@gmail.com</a>
+        </div>
+        <!-- Столбец 3: Адрес и график работы -->
+        <div>
+          <p class="label">Адрес</p>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank">г. Минск, ул. Ленина, 15</a><br>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank">г. Минск, ул. Ратомская, 7</a>
+          <p style="margin-top: 8px; color: rgba(204,204,204,0.6); font-size: 0.8rem;">🕐 График работы:<br>Пн–Пт: 10:00 – 18:00</p>
+        </div>
+        <!-- Столбец 4: О компании -->
+        <div>
+          <p class="label">О компании</p>
+          <p>ЧУП «Вандралюбы»</p>
+          <p>© 2026. Все права защищены</p>
+          <a href="#">Политика конфиденциальности</a>
+        </div>
       </div>
-      <div>
-        <strong>Адрес:</strong>
-        <p>г. Минск, ул. Ленина, 15</p>
-        <p>г. Минск, ул. Ратомская, 7</p>
-      </div>
-      <div>
-        <strong>Заказ туров и бронирование:</strong>
-        <p>тел. +375 29 245 17 70</p>
-        <p>e-mail: vandraluby@gmail.com</p>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
       </div>
     </div>
   </footer>
+  <script src="site.js" defer></script>
+  <script>
+    // Переход с карточки каталога на персональную страницу тура
+    // (аналогично блоку "Популярные предложения" на главной)
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('[data-tour-id]').forEach(card => {
+        const openTour = function () {
+          const tourId = card.getAttribute('data-tour-id');
+          window.location.href = 'tour.html?id=' + encodeURIComponent(tourId);
+        };
+
+        // Делаем карточку доступной с клавиатуры
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+        const title = card.querySelector('h3');
+        card.setAttribute('aria-label', 'Открыть страницу тура «' + (title ? title.textContent : '') + '»');
+
+        card.addEventListener('click', openTour);
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openTour();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

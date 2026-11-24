@@ -126,7 +126,7 @@
     /* ===== CONTACTS SECTION ===== */
     .contacts-section {
       max-width: 1200px;
-      margin-top: 100px;
+      margin-top: 24px;
       margin-left: 400px;
       padding: 60px 40px 80px;
     
@@ -176,6 +176,18 @@
       font-size: 15px;
       line-height: 1.5;
       color: var(--foreground);
+    }
+    /* Кликабельные контактные данные (без подчёркивания) */
+    .contact-block a {
+      display: inline-block;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-block a:hover {
+      color: var(--primary);
     }
     /* ===== FORM SECTION ===== */
     .form-section {
@@ -356,14 +368,15 @@
       .form-section { padding: 40px 20px 50px; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <!-- Header -->
-   <header class="header">
+   <header class="header header--solid">
     <div class="container">
       <a href="index.html" class="logo">
-        <div ><img src="black_logo.png" width="40px" height="35px" alt="logo"></div>
-        <div class="logo-text">
+       <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+         <div class="logo-text">
           <div class="logo-title">ВАНДРАЛЮБЫ</div>
           <div class="logo-sub">Турагентство</div>
         </div>
@@ -373,17 +386,19 @@
         <a href="about.html">Вандралюбы</a>
         <a href="catalog.html">Каталог</a>
         <a href="travelers.html">Туристам</a>
-        <a href="#" class="active">Контакты</a>
+        <a href="contacts.html" class="active">Контакты</a>
       </nav>
       <div class="header-right">
         <a href="tel:+375292451770" class="phone-btn">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           тел. +375 29 245 17 70
         </a>
-        <a href="registration.html">
-        <button class="arrow-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button></a>
+        <!-- Кнопка входа/кабинет -->
+        <a href="login.html" id="authLink">
+          <button class="arrow-btn" id="authBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </a>
       </div>
     </div>
   </header>
@@ -407,15 +422,21 @@
       <div class="contact-details">
         <div class="contact-block">
           <h4>Адрес</h4>
-          <p>г. Минск, ул. Ленина, 15<br>г. Минск, ул. Ратомская, 7</p>
+          <p>
+            <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank" rel="noopener">г. Минск, ул. Ленина, 15</a><br>
+            <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank" rel="noopener">г. Минск, ул. Ратомская, 7</a>
+          </p>
         </div>
         <div class="contact-block">
           <h4>Email</h4>
-          <p>vandraluby@gmail.com</p>
+          <p><a href="mailto:vandraluby@gmail.com">vandraluby@gmail.com</a></p>
         </div>
         <div class="contact-block">
           <h4>Телефон</h4>
-          <p>+375 29 245 17 70<br>+375 33 456 88 90</p>
+          <p>
+            <a href="tel:+375292451770">+375 29 245 17 70</a><br>
+            <a href="tel:+375334568890">+375 33 456 88 90</a>
+          </p>
         </div>
         <div class="contact-block">
           <h4>Время работы</h4>
@@ -446,33 +467,58 @@
     </div>
   </section>
   <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
+  <footer class="footer">
+    <div class="container">
       <div class="footer-logo">
-         <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
-         <div class="logo-text">
-          <div class="name">Вандралюбы</div>
-          <div class="sub">Турагентство</div>
+        <div class="footer-logo-inner">
+           <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+        <div>
+            <div class="footer-logo-text">Вандралюбы</div>
+            <div class="footer-logo-sub">Турагентство</div>
+          </div>
         </div>
       </div>
-      <div class="footer-cols">
+      <div class="footer-grid">
+        <!-- Столбец 1: Меню -->
         <div>
-          <p class="col-title">ЧУП «Вандралюбы»</p>
+          
+          <a href="index.html">Главная</a><br>
+          <a href="about.html">Вандралюбы</a><br>
+          <a href="catalog.html">Каталог</a><br>
+          <a href="travelers.html">Туристам</a><br>
+          <a href="contacts.html">Контакты</a><br>
+          <a href="login.html">Вход в личный кабинет</a>
+        </div>
+        <!-- Столбец 2: Контакты -->
+        <div>
+          <p class="label">Свяжитесь с нами</p>
+          <a href="tel:+375292451770">тел. +375 29 245 17 70</a><br>
+          <a href="mailto:vandraluby@gmail.com">e-mail: vandraluby@gmail.com</a>
+        </div>
+        <!-- Столбец 3: Адрес и график работы -->
+        <div>
+          <p class="label">Адрес</p>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank">г. Минск, ул. Ленина, 15</a><br>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank">г. Минск, ул. Ратомская, 7</a>
+          <p style="margin-top: 8px; color: rgba(204,204,204,0.6); font-size: 0.8rem;">🕐 График работы:<br>Пн–Пт: 10:00 – 18:00</p>
+        </div>
+        <!-- Столбец 4: О компании -->
+        <div>
+          <p class="label">О компании</p>
+          <p>ЧУП «Вандралюбы»</p>
           <p>© 2026. Все права защищены</p>
-          <p><a href="#">Политика конфиденциальности</a></p>
+          <a href="#">Политика конфиденциальности</a>
         </div>
-        <div>
-          <p class="col-title">Адрес:</p>
-          <p>г. Минск, ул. Ленина, 15</p>
-          <p>г. Минск, ул. Ратомская, 7</p>
-        </div>
-        <div>
-          <p class="col-title">Заказ туров и бронирование:</p>
-          <p>тел. +375 29 245 17 70</p>
-          <p>e-mail: vandraluby@gmail.com</p>
-        </div>
+      </div>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
       </div>
     </div>
   </footer>
+  <script src="site.js" defer></script>
 </body>
 </html>

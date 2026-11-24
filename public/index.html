@@ -12,7 +12,9 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --primary: hsl(33, 38%, 49%);
+      --primary-hover: hsl(33, 38%, 42%);
       --primary-fg: #ffffff;
+      --white: #ffffff;
       --foreground: hsl(0, 0%, 13%);
       --muted: hsl(30, 10%, 94%);
       --muted-fg: hsl(0, 0%, 40%);
@@ -262,6 +264,9 @@
     .tour-item .tour-select-btn.selected {
       background: #2e7d32;
     }
+    .tour-item .tour-select-btn.selected:hover {
+      background: #2e7d32;
+    }
 
     /* ===== FEATURES ===== */
     .features { background: var(--gallery-bg); padding: 4rem 0; }
@@ -312,6 +317,20 @@
     .tour-card h3 { color: #fff; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
     .tour-card .tour-sub { color: rgba(255, 252, 252, 0.7); font-size: 0.75rem; margin-top: 0.25rem; }
     .tour-card .tour-price { color: var(--primary); font-size: 0.875rem; font-weight: 600; margin-top: 0.5rem; }
+    /* Подсказка о переходе на персональную страницу тура */
+    .tour-card[data-tour-id] { cursor: pointer; }
+    .tour-card[data-tour-id] .tour-card-content::after {
+      content: 'Подробнее →';
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.75);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tour-card[data-tour-id]:hover .tour-card-content::after { opacity: 1; }
+    .tour-card[data-tour-id]:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
     .tour-tall { grid-row: span 2; }
     .tour-wide { grid-column: span 2; }
     
@@ -481,12 +500,13 @@
       .tours-list { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
     <div class="container">
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
        <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
          <div class="logo-text">
           <div class="logo-title">ВАНДРАЛЮБЫ</div>
@@ -494,7 +514,7 @@
         </div>
       </a>
       <nav class="nav">
-        <a href="#" class="active">Главная</a>
+        <a href="index.html" class="active">Главная</a>
         <a href="about.html">Вандралюбы</a>
         <a href="catalog.html">Каталог</a>
         <a href="travelers.html">Туристам</a>
@@ -551,15 +571,15 @@
       
       <!-- Первая сетка (первые 5 туров) -->
       <div class="tours-grid">
-        <div class="tour-card">
+        <div class="tour-card" data-tour-id="glubokoe">
           <img src="glubokoe.jpg" alt="Глубокое">
           <div class="tour-card-content"><h3>Глубокое в глубинку</h3><span class="tour-price">от 180 BYN</span></div>
         </div>
-        <div class="tour-card">
+        <div class="tour-card" data-tour-id="grodno">
           <img src="grodno_houses.jpg" alt="Гродно">
           <div class="tour-card-content"><h3>Классика Гродно</h3><span class="tour-price">от 200 BYN</span></div>
         </div>
-        <div class="tour-card tour-tall tour-wide">
+        <div class="tour-card tour-tall tour-wide" data-tour-id="heart-deep">
           <img src="bel_deep_village.jpg" alt="Сердце глубинки">
           <div class="tour-card-content">
             <h3>Сердце белорусской глубинки</h3>
@@ -567,11 +587,11 @@
             <span class="tour-price">от 350 BYN</span>
           </div>
         </div>
-        <div class="tour-card">
+        <div class="tour-card" data-tour-id="brest">
           <img src="brest_fortress.jpg" alt="Брест">
           <div class="tour-card-content"><h3>Брестская крепость</h3><span class="tour-price">от 130 BYN</span></div>
         </div>
-        <div class="tour-card">
+        <div class="tour-card" data-tour-id="polessye">
           <img src="polessye.jpg" alt="Полесье">
           <div class="tour-card-content"><h3>Исследование Полесья: дремлющие болота</h3><span class="tour-price">от 120 BYN</span></div>
         </div>
@@ -580,7 +600,7 @@
       <!-- Вторая сетка (большая слева, 4 маленькие справа) -->
       <div class="tours-grid-reversed">
         <!-- Большая карточка слева -->
-        <div class="tour-card tour-card-big">
+        <div class="tour-card tour-card-big" data-tour-id="belovezhskaya">
           <img src="reserves.jpg" alt="Беловежская Пуща">
           <div class="tour-card-content">
             <h3>Заказники и города: Беловежская Пуща и её соседи</h3>
@@ -589,19 +609,19 @@
           </div>
         </div>
         <!-- Маленькие карточки справа (2 сверху, 2 снизу) -->
-        <div class="tour-card tour-card-small-top">
+        <div class="tour-card tour-card-small-top" data-tour-id="oshmyany">
           <img src="oshmyany.jpg" alt="Ошмяны">
           <div class="tour-card-content"><h3>Ошмяны: край храмов и вишнёвых садов</h3><span class="tour-price">от 100 BYN</span></div>
         </div>
-        <div class="tour-card tour-card-small-top-right">
+        <div class="tour-card tour-card-small-top-right" data-tour-id="mozyr">
           <img src="mozyr.png" alt="Мозырь">
           <div class="tour-card-content"><h3>Мозырь на Днепре</h3><span class="tour-price">от 110 BYN</span></div>
         </div>
-        <div class="tour-card tour-card-small-bottom">
+        <div class="tour-card tour-card-small-bottom" data-tour-id="soligorsk">
           <img src="soligorsk.jpg" alt="Солигорск">
           <div class="tour-card-content"><h3>Солигорск: от белых солнц до изумрудных озер</h3><span class="tour-price">от 200 BYN</span></div>
         </div>
-        <div class="tour-card tour-card-small-bottom-right">
+        <div class="tour-card tour-card-small-bottom-right" data-tour-id="verhnedvinsk">
           <img src="verhnedvinsk.jpg" alt="Верхнедвинск">
           <div class="tour-card-content"><h3>Верхнедвинск: где начинается Двина</h3><span class="tour-price">от 160 BYN</span></div>
         </div>
@@ -786,11 +806,11 @@
         <!-- Столбец 1: Меню -->
         <div>
           
-          <a href="#">Главная</a><br>
+          <a href="index.html">Главная</a><br>
           <a href="about.html">Вандралюбы</a><br>
           <a href="catalog.html">Каталог</a><br>
           <a href="travelers.html">Туристам</a><br>
-          <a href="contacts.html">Контакты</a>
+          <a href="contacts.html">Контакты</a><br>
           <a href="login.html">Вход в личный кабинет</a>
         </div>
         <!-- Столбец 2: Контакты -->
@@ -814,9 +834,17 @@
           <a href="#">Политика конфиденциальности</a>
         </div>
       </div>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
+      </div>
     </div>
   </footer>
   
+  <script src="tours-data.js"></script>
   <script>
     // Ключ для хранения данных пользователя
     const USER_STORAGE_KEY = 'user';
@@ -826,7 +854,34 @@
       checkAuth();
       updateHeaderButton();
       updateBookingForm();
+      initPopularToursLinks();
     });
+
+    // ============================================
+    // Переход на персональную страницу тура
+    // (блок "Популярные предложения")
+    // ============================================
+    function initPopularToursLinks() {
+      document.querySelectorAll('.tour-card[data-tour-id]').forEach(card => {
+        const openTour = () => {
+          const tourId = card.getAttribute('data-tour-id');
+          window.location.href = `tour.html?id=${encodeURIComponent(tourId)}`;
+        };
+
+        // Делаем карточку доступной с клавиатуры
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Открыть страницу тура «${card.querySelector('h3') ? card.querySelector('h3').textContent : ''}»`);
+
+        card.addEventListener('click', openTour);
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openTour();
+          }
+        });
+      });
+    }
 
     // Проверка авторизации
     function checkAuth() {
@@ -968,7 +1023,7 @@
 
       selectedTourName = tourName;
       selectedTourDate = tourDate;
-      selectedTour = { name: tourName, date: tourDate };
+      selectedTour = { name: tourName, date: tourDate, price: parentItem.dataset.price || '' };
 
       const infoDiv = document.getElementById('selectedTourInfo');
       infoDiv.style.display = 'block';
@@ -1035,7 +1090,8 @@
             phone: phone,
             email: email,
             tourDate: selectedTourDate,
-            comment: fullComment
+            comment: fullComment,
+            price: selectedTour.price || ''
           })
         });
         

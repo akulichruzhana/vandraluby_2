@@ -302,18 +302,41 @@
       .footer-cols { grid-template-columns: 1fr; gap: 24px; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <!-- Header -->
-  <div class="header">
-    <div class="logo">
-      <div><img src="black_logo.png" width="40px" height="35px" alt="logo"></div>
-      <div class="logo-text">
-        <span class="name">ВАНДРАЛЮБЫ</span>
-        <span class="sub">Турагентство</span>
+  <header class="header header--solid">
+    <div class="container">
+      <a href="index.html" class="logo">
+       <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+         <div class="logo-text">
+          <div class="logo-title">ВАНДРАЛЮБЫ</div>
+          <div class="logo-sub">Турагентство</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="about.html">Вандралюбы</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="travelers.html">Туристам</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-right">
+        <a href="tel:+375292451770" class="phone-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          тел. +375 29 245 17 70
+        </a>
+        <!-- Кнопка входа/кабинет -->
+        <a href="login.html" id="authLink">
+          <button class="arrow-btn" id="authBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </a>
       </div>
     </div>
-  </div>
+  </header>
+
   <!-- Main -->
   <main class="main">
     <h1>Создать аккаунт</h1>
@@ -346,34 +369,55 @@
     </form>
   </main>
   <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
+  <footer class="footer">
+    <div class="container">
       <div class="footer-logo">
-        <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
-        <div class="logo-text">
-          <span class="name">Вандралюбы</span>
-          <span class="sub">Турагентство</span>
+        <div class="footer-logo-inner">
+           <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+        <div>
+            <div class="footer-logo-text">Вандралюбы</div>
+            <div class="footer-logo-sub">Турагентство</div>
+          </div>
         </div>
       </div>
-      <div class="footer-cols">
+      <div class="footer-grid">
+        <!-- Столбец 1: Меню -->
         <div>
-          <p class="col-title">ЧУП «Вандралюбы»</p>
+          
+          <a href="index.html">Главная</a><br>
+          <a href="about.html">Вандралюбы</a><br>
+          <a href="catalog.html">Каталог</a><br>
+          <a href="travelers.html">Туристам</a><br>
+          <a href="contacts.html">Контакты</a><br>
+          <a href="login.html">Вход в личный кабинет</a>
+        </div>
+        <!-- Столбец 2: Контакты -->
+        <div>
+          <p class="label">Свяжитесь с нами</p>
+          <a href="tel:+375292451770">тел. +375 29 245 17 70</a><br>
+          <a href="mailto:vandraluby@gmail.com">e-mail: vandraluby@gmail.com</a>
+        </div>
+        <!-- Столбец 3: Адрес и график работы -->
+        <div>
+          <p class="label">Адрес</p>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank">г. Минск, ул. Ленина, 15</a><br>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank">г. Минск, ул. Ратомская, 7</a>
+          <p style="margin-top: 8px; color: rgba(204,204,204,0.6); font-size: 0.8rem;">🕐 График работы:<br>Пн–Пт: 10:00 – 18:00</p>
+        </div>
+        <!-- Столбец 4: О компании -->
+        <div>
+          <p class="label">О компании</p>
+          <p>ЧУП «Вандралюбы»</p>
           <p>© 2026. Все права защищены</p>
           <a href="#">Политика конфиденциальности</a>
         </div>
-        <div>
-          <p class="col-title">Адрес:</p>
-          <p>г. Минск, ул. Ленина, 15</p>
-          <p>г. Минск, ул. Ратомская, 7</p>
-        </div>
-        <div>
-          <p class="col-title">Заказ туров и бронирование:</p>
-          <p>тел. +375 29 245 17 70</p>
-          <p>e-mail: vandraluby@gmail.com</p>
-        </div>
-        <div class="footer-home-btn">
-          <a href="index.html">На главную</a>
-        </div>
+      </div>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
       </div>
     </div>
   </footer>
@@ -460,7 +504,7 @@
       }
       
       // Валидация имени и фамилии (только буквы)
-      const nameRegex = /^[A-Za-zА-Яа-я\s\-]+$/;
+      const nameRegex = /^[\p{L}\s\-]+$/u;
       if (!nameRegex.test(name) || !nameRegex.test(surname)) {
         formMessage.style.display = 'block';
         formMessage.className = 'form-message error';
@@ -524,10 +568,11 @@
           // Очищаем форму
           document.getElementById('registerForm').reset();
           
-          // Перенаправляем на страницу входа через 2 секунды
+          // Сессия уже активна (user сохранён в localStorage),
+          // сразу открываем личный кабинет — повторный вход не нужен
           setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 2000);
+            window.location.href = 'cabinet.html';
+          }, 1500);
         } else {
           formMessage.className = 'form-message error';
           formMessage.textContent = result.error || 'Ошибка регистрации. Попробуйте ещё раз.';
@@ -545,5 +590,6 @@
     // Назначаем обработчик на форму
     document.getElementById('registerForm').addEventListener('submit', submitRegistration);
   </script>
+  <script src="site.js" defer></script>
 </body>
 </html>

@@ -91,6 +91,29 @@
       border-color: var(--primary);
       color: var(--primary);
     }
+    /* ===== USER BAR (строка пользователя под шапкой) ===== */
+    .user-bar {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+    }
+    .user-bar .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .user-bar .user-greeting {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .user-bar .user-greeting strong {
+      color: var(--foreground);
+    }
     /* ===== MAIN CONTENT ===== */
     .main {
       flex: 1;
@@ -261,6 +284,39 @@
       background: #1565c0;
       color: #fff;
     }
+    .btn-action.prepay {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    .btn-action.prepay:hover {
+      background: #2e7d32;
+      color: #fff;
+    }
+    .btn-action.prepay:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-action.paid {
+      background: #e8f5e9;
+      color: #2e7d32;
+      cursor: default;
+    }
+    .booking-info .booking-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+    .booking-info .booking-countdown {
+      font-size: 13px;
+      color: #e65100;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .booking-info .booking-countdown.expired {
+      color: #c62828;
+    }
     .btn-action.completed {
       background: #e8f5e9;
       color: #2e7d32;
@@ -383,6 +439,169 @@
     .modal-content .guide-bio strong {
       color: var(--primary);
     }
+    /* ===== PREPAY MODAL ===== */
+    .prepay-tour {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .prepay-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 8px 0;
+    }
+    .prepay-row strong {
+      color: var(--foreground);
+    }
+    .prepay-row--total {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    .prepay-row--total strong {
+      color: var(--primary);
+      font-size: 18px;
+    }
+    .prepay-note {
+      background: #fff3e0;
+      color: #e65100;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .form-field {
+      display: block;
+      margin-bottom: 12px;
+    }
+    .form-field span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--foreground);
+      box-sizing: border-box;
+    }
+    .form-field input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .prepay-card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .prepay-submit {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 20px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+    .prepay-submit:hover {
+      opacity: 0.85;
+    }
+    .prepay-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .prepay-message {
+      font-size: 13px;
+      margin-top: 10px;
+      min-height: 18px;
+      text-align: center;
+    }
+    /* ===== Выбор способа оплаты ===== */
+    .prepay-methods { margin-bottom: 16px; }
+    .prepay-methods-title {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .prepay-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .prepay-method {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 6px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .prepay-method:hover {
+      border-color: var(--primary);
+    }
+    .prepay-method.active {
+      border-color: var(--primary);
+      background: rgba(181, 137, 58, 0.08);
+      box-shadow: inset 0 0 0 1px var(--primary);
+    }
+    .prepay-method:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    .prepay-method-icon { font-size: 20px; line-height: 1; }
+    .prepay-method-name { font-size: 13px; font-weight: 600; }
+    .prepay-method-hint { font-size: 11px; color: var(--muted); }
+    .prepay-panel[hidden] { display: none; }
+    .prepay-info {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+    .prepay-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 4px 0;
+    }
+    .prepay-info-row strong {
+      color: var(--foreground);
+      text-align: right;
+      word-break: break-all;
+    }
+    .prepay-hint {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
     /* ===== FOOTER ===== */
     footer {
       background: var(--footer-bg);
@@ -493,22 +712,48 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
-    <a href="index.html" class="logo">
-      <div><img src="black_logo.png" width="40px" height="35px" alt="logo"></div>
-      <div class="logo-text">
-        <span class="name">ВАНДРАЛЮБЫ</span>
-        <span class="sub">Турагентство</span>
+  <header class="header header--solid">
+    <div class="container">
+      <a href="index.html" class="logo">
+       <div ><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+         <div class="logo-text">
+          <div class="logo-title">ВАНДРАЛЮБЫ</div>
+          <div class="logo-sub">Турагентство</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="about.html">Вандралюбы</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="travelers.html">Туристам</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-right">
+        <a href="tel:+375292451770" class="phone-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          тел. +375 29 245 17 70
+        </a>
+        <!-- Кнопка входа/кабинет -->
+        <a href="login.html" id="authLink">
+          <button class="arrow-btn" id="authBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </a>
       </div>
-    </a>
-    <div class="header-actions">
+    </div>
+  </header>
+
+  <!-- Строка пользователя: приветствие и выход -->
+  <div class="user-bar">
+    <div class="container">
       <span class="user-greeting">Здравствуйте, <strong id="userNameDisplay">Гость</strong></span>
       <button class="logout-btn" id="logoutBtn">Выйти</button>
     </div>
-  </header>
+  </div>
 
   <!-- Main -->
   <main class="main">
@@ -568,39 +813,132 @@
     </div>
   </div>
 
+  <!-- Modal для внесения предоплаты -->
+  <div class="modal-overlay" id="prepayModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closePrepayModal()">×</button>
+      <h3>Внесение предоплаты</h3>
+      <div class="prepay-tour" id="prepayTourName">Тур</div>
+      <div class="prepay-row">
+        <span>Стоимость тура</span>
+        <strong id="prepayTotal">—</strong>
+      </div>
+      <div class="prepay-row prepay-row--total">
+        <span>Предоплата (30%)</span>
+        <strong id="prepayAmount">—</strong>
+      </div>
+      <div class="prepay-note" id="prepayNote">
+        Внесите предоплату в течение <strong id="prepayTimer">30:00</strong>, иначе бронирование будет автоматически удалено.
+      </div>
+      <form id="prepayForm">
+        <div class="prepay-methods">
+          <div class="prepay-methods-title">Способ оплаты</div>
+          <div class="prepay-methods-grid" role="radiogroup" aria-label="Способ оплаты">
+            <button type="button" class="prepay-method active" data-method="card" aria-pressed="true">
+              <span class="prepay-method-icon">💳</span>
+              <span class="prepay-method-name">Банковская карта</span>
+              <span class="prepay-method-hint">Visa · Mastercard · БЕЛКАРТ</span>
+            </button>
+            <button type="button" class="prepay-method" data-method="erip" aria-pressed="false">
+              <span class="prepay-method-icon">🧾</span>
+              <span class="prepay-method-name">ЕРИП</span>
+              <span class="prepay-method-hint">Оплата по коду</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="prepay-panel" id="prepayPanelCard">
+          <label class="form-field">
+            <span>Номер карты</span>
+            <input type="text" id="prepayCard" placeholder="0000 0000 0000 0000" inputmode="numeric" autocomplete="cc-number">
+          </label>
+          <div class="prepay-card-row">
+            <label class="form-field">
+              <span>Срок действия</span>
+              <input type="text" id="prepayExpiry" placeholder="ММ/ГГ" autocomplete="cc-exp">
+            </label>
+            <label class="form-field">
+              <span>CVC</span>
+              <input type="password" id="prepayCvc" placeholder="•••" inputmode="numeric" autocomplete="cc-csc" maxlength="4">
+            </label>
+          </div>
+          <label class="form-field">
+            <span>Имя держателя карты</span>
+            <input type="text" id="prepayCardholder" placeholder="IVAN PETROV" autocomplete="cc-name">
+          </label>
+        </div>
+
+        <div class="prepay-panel" id="prepayPanelErip" hidden>
+          <div class="prepay-info">
+            <div class="prepay-info-row"><span>Код для оплаты</span><strong>30123 4567 8901</strong></div>
+            <div class="prepay-info-row"><span>Получатель</span><strong>ООО «Вандралюбы»</strong></div>
+            <div class="prepay-info-row"><span>Назначение</span><strong>Предоплата за тур</strong></div>
+            <div class="prepay-info-row"><span>Сумма</span><strong id="prepayEripAmount">—</strong></div>
+          </div>
+          <p class="prepay-hint">Откройте приложение банка, выберите раздел «ЕРИП» и введите код. После оплаты нажмите кнопку ниже — бронь будет подтверждена.</p>
+        </div>
+
+        <button type="submit" class="prepay-submit" id="prepaySubmitBtn">Оплатить предоплату</button>
+        <div class="prepay-message" id="prepayMessage"></div>
+      </form>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
+  <footer class="footer">
+    <div class="container">
       <div class="footer-logo">
-        <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
-        <div class="logo-text">
-          <span class="name">Вандралюбы</span>
-          <span class="sub">Турагентство</span>
+        <div class="footer-logo-inner">
+           <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+        <div>
+            <div class="footer-logo-text">Вандралюбы</div>
+            <div class="footer-logo-sub">Турагентство</div>
+          </div>
         </div>
       </div>
-      <div class="footer-cols">
+      <div class="footer-grid">
+        <!-- Столбец 1: Меню -->
         <div>
-          <p class="col-title">ЧУП «Вандралюбы»</p>
+          
+          <a href="index.html">Главная</a><br>
+          <a href="about.html">Вандралюбы</a><br>
+          <a href="catalog.html">Каталог</a><br>
+          <a href="travelers.html">Туристам</a><br>
+          <a href="contacts.html">Контакты</a><br>
+          <a href="login.html">Вход в личный кабинет</a>
+        </div>
+        <!-- Столбец 2: Контакты -->
+        <div>
+          <p class="label">Свяжитесь с нами</p>
+          <a href="tel:+375292451770">тел. +375 29 245 17 70</a><br>
+          <a href="mailto:vandraluby@gmail.com">e-mail: vandraluby@gmail.com</a>
+        </div>
+        <!-- Столбец 3: Адрес и график работы -->
+        <div>
+          <p class="label">Адрес</p>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank">г. Минск, ул. Ленина, 15</a><br>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank">г. Минск, ул. Ратомская, 7</a>
+          <p style="margin-top: 8px; color: rgba(204,204,204,0.6); font-size: 0.8rem;">🕐 График работы:<br>Пн–Пт: 10:00 – 18:00</p>
+        </div>
+        <!-- Столбец 4: О компании -->
+        <div>
+          <p class="label">О компании</p>
+          <p>ЧУП «Вандралюбы»</p>
           <p>© 2026. Все права защищены</p>
           <a href="#">Политика конфиденциальности</a>
         </div>
-        <div>
-          <p class="col-title">Адрес:</p>
-          <p>г. Минск, ул. Ленина, 15</p>
-          <p>г. Минск, ул. Ратомская, 7</p>
-        </div>
-        <div>
-          <p class="col-title">Заказ туров и бронирование:</p>
-          <p>тел. +375 29 245 17 70</p>
-          <p>e-mail: vandraluby@gmail.com</p>
-        </div>
-        <div class="footer-home-btn">
-          <a href="index.html">На главную</a>
-        </div>
+      </div>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
       </div>
     </div>
   </footer>
 
+  <script src="tours-data.js"></script>
   <script>
     // Ключ для хранения данных пользователя (только user, без времени)
     const USER_STORAGE_KEY = 'user';
@@ -833,11 +1171,91 @@
       }
     }
 
+    // Ожидание предоплаты: 30 минут с момента бронирования
+    const HOLD_MS = 30 * 60 * 1000;
+    let countdownInterval = null;
+    let expiredReloadDone = false; // защита от бесконечной перезагрузки списка
+
+    // Извлекаем числовую стоимость из строки вида "от 350 BYN"
+    function parsePrice(price) {
+      if (!price) return null;
+      const match = String(price).replace(/\s/g, '').match(/(\d+(?:[.,]\d+)?)/);
+      return match ? parseFloat(match[1].replace(',', '.')) : null;
+    }
+
+    // Стоимость тура: из карточки бронирования, либо из каталога туров
+    function getTourPrice(booking, tourName) {
+      if (booking.price) return booking.price;
+      if (typeof TOURS !== 'undefined') {
+        const tour = TOURS.find(t => t.title === tourName);
+        if (tour && tour.price) return tour.price;
+      }
+      return '';
+    }
+
+    // Форматирование суммы предоплаты (30%)
+    function getPrepayment(price) {
+      const total = parsePrice(price);
+      if (total === null) return '';
+      return `${Math.round(total * 0.3 * 100) / 100} BYN`;
+    }
+
+    // Форматирование оставшегося времени брони (мм:сс)
+    function formatRemaining(ms) {
+      const total = Math.max(0, Math.floor(ms / 1000));
+      const minutes = String(Math.floor(total / 60)).padStart(2, '0');
+      const seconds = String(total % 60).padStart(2, '0');
+      return `${minutes}:${seconds}`;
+    }
+
+    // Запускаем таймер обратного отсчёта для броней без предоплаты
+    function startCountdown() {
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      const update = () => {
+        let expired = false;
+        document.querySelectorAll('.booking-countdown[data-expires]').forEach(el => {
+          const expires = new Date(el.dataset.expires).getTime();
+          const remaining = expires - Date.now();
+
+          if (remaining <= 0) {
+            el.textContent = '⏰ Срок бронирования истёк';
+            el.classList.add('expired');
+            expired = true;
+          } else {
+            el.textContent = `⏳ Предоплату внести в течение: ${formatRemaining(remaining)}`;
+          }
+        });
+
+        if (!expired) {
+          // Просроченных броней нет — можно снова разрешить перезагрузку
+          expiredReloadDone = false;
+        } else if (!expiredReloadDone) {
+          // Время вышло — перезагружаем список один раз (сервер удалит просроченные брони)
+          expiredReloadDone = true;
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+          const userData = localStorage.getItem(USER_STORAGE_KEY);
+          if (userData) {
+            const user = JSON.parse(userData);
+            loadUserBookings(user.email);
+          }
+        }
+      };
+
+      update();
+      countdownInterval = setInterval(update, 1000);
+    }
+
     // Отображение бронирований (с кнопками вместо статуса и ID)
     function renderBookings(bookings) {
       const bookingsList = document.getElementById('bookingsList');
       
       if (!bookings || bookings.length === 0) {
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
         bookingsList.innerHTML = `
           <div class="empty-state">
             <div class="empty-icon">📭</div>
@@ -876,8 +1294,17 @@
           }
         }
 
+        // Стоимость тура и предоплата (30%)
+        const price = getTourPrice(booking, tourName);
+        const prepayment = getPrepayment(price);
+
         const status = booking.status || 'new';
-        
+        const isPaid = status === 'prepaid' || !!booking.prepayment_at;
+
+        // Время жизни брони без предоплаты (30 минут с момента создания).
+        // У старых броней expires_at отсутствует — таймер для них не показываем.
+        const expiresAt = booking.expires_at;
+
         // Определяем, какие кнопки показывать
         let actionsHTML = '';
         
@@ -885,19 +1312,33 @@
           actionsHTML = `<span class="btn-action cancelled">Отменено</span>`;
         } else if (status === 'completed') {
           actionsHTML = `<span class="btn-action completed">Завершено</span>`;
-        } else {
-          // Для активных бронирований показываем кнопки
+        } else if (isPaid) {
+          // Предоплата внесена — бронь подтверждена
           actionsHTML = `
             <button class="btn-action cancel" onclick="cancelBooking(${booking.id}, this)">✕ Отменить</button>
-            <button class="btn-action guide" onclick="openGuideModal('${tourName}')">Гид</button>
+            <span class="btn-action paid">✓ Предоплата внесена</span>
+            <button class="btn-action guide" onclick="openGuideModal(this.dataset.tour)" data-tour="${escapeAttr(tourName)}">О гиде</button>
+          `;
+        } else {
+          // Активная бронь: ожидает предоплаты в течение 30 минут
+          actionsHTML = `
+            <button class="btn-action cancel" onclick="cancelBooking(${booking.id}, this)">✕ Отменить</button>
+            <button class="btn-action prepay" id="prepayBtn${booking.id}" onclick="openPrepayModal(${booking.id}, this.dataset.tour, this.dataset.price, this.dataset.expires)" data-tour="${escapeAttr(tourName)}" data-price="${escapeAttr(price)}" data-expires="${escapeAttr(expiresAt || '')}">Внести предоплату</button>
+            <button class="btn-action guide" onclick="openGuideModal(this.dataset.tour)" data-tour="${escapeAttr(tourName)}">О гиде</button>
           `;
         }
+
+        const countdownHTML = (!isPaid && status !== 'cancelled' && status !== 'completed' && expiresAt)
+          ? `<div class="booking-countdown" data-expires="${escapeAttr(expiresAt)}">⏳ Предоплату внести в течение: ${formatRemaining(new Date(expiresAt).getTime() - Date.now())}</div>`
+          : '';
 
         return `
           <div class="booking-item">
             <div class="booking-info">
               <div class="booking-tour"> ${tourName}</div>
               <div class="booking-date"> ${formattedDate}</div>
+              ${price ? `<div class="booking-price">Стоимость: ${price}${prepayment ? ` · Предоплата (30%): ${prepayment}` : ''}</div>` : ''}
+              ${countdownHTML}
               ${comment ? `<div class="booking-comment">${comment}</div>` : ''}
             </div>
             <div class="booking-actions">
@@ -906,12 +1347,206 @@
           </div>
         `;
       }).join('');
+
+      startCountdown();
     }
+
+    // Экранирование значений в HTML-атрибутах
+    function escapeAttr(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // ===== Предоплата =====
+    let currentPrepay = null; // { id, tourName, price }
+    let prepayTimerInterval = null;
+    let currentPrepayMethod = 'card'; // card | erip
+
+    // Подписи кнопки отправки в зависимости от способа оплаты
+    const PREPAY_BTN_LABELS = {
+      card: 'Оплатить предоплату',
+      erip: 'Я оплатил через ЕРИП'
+    };
+
+    function setPrepayMethod(method) {
+      if (!PREPAY_BTN_LABELS[method]) method = 'card';
+      currentPrepayMethod = method;
+
+      document.querySelectorAll('.prepay-method').forEach(btn => {
+        const active = btn.dataset.method === method;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      document.getElementById('prepayPanelCard').hidden = method !== 'card';
+      document.getElementById('prepayPanelErip').hidden = method !== 'erip';
+
+      document.getElementById('prepaySubmitBtn').textContent = PREPAY_BTN_LABELS[method];
+    }
+
+    document.querySelectorAll('.prepay-method').forEach(btn => {
+      btn.addEventListener('click', () => setPrepayMethod(btn.dataset.method));
+    });
+
+    function openPrepayModal(bookingId, tourName, price, expiresAt) {
+      currentPrepay = { id: bookingId, tourName: tourName, price: price };
+
+      document.getElementById('prepayTourName').textContent = tourName;
+      document.getElementById('prepayTotal').textContent = price || 'не указана';
+      document.getElementById('prepayAmount').textContent = getPrepayment(price) || '30% от стоимости';
+
+      const message = document.getElementById('prepayMessage');
+      message.textContent = '';
+      message.style.color = '';
+      document.getElementById('prepayForm').reset();
+
+      // Способ оплаты по умолчанию — карта; сумма для ЕРИП
+      setPrepayMethod('card');
+      document.getElementById('prepayEripAmount').textContent = getPrepayment(price) || '30% от стоимости';
+
+      // Обратный отсчёт до конца 30-минутного срока брони
+      const noteEl = document.getElementById('prepayNote');
+      noteEl.innerHTML = expiresAt
+        ? 'Внесите предоплату в течение <strong id="prepayTimer">30:00</strong>, иначе бронирование будет автоматически удалено.'
+        : 'Внесите предоплату, чтобы подтвердить бронирование.';
+      const timerEl = document.getElementById('prepayTimer');
+      if (prepayTimerInterval) clearInterval(prepayTimerInterval);
+      prepayTimerInterval = null;
+      // Таймер есть только когда задан срок брони — иначе элемента #prepayTimer нет
+      if (timerEl && expiresAt) {
+        const updateTimer = () => {
+          const remaining = new Date(expiresAt).getTime() - Date.now();
+          timerEl.textContent = formatRemaining(remaining);
+          if (remaining <= 0) {
+            clearInterval(prepayTimerInterval);
+            prepayTimerInterval = null;
+            timerEl.textContent = '00:00';
+          }
+        };
+        updateTimer();
+        prepayTimerInterval = setInterval(updateTimer, 1000);
+      }
+
+      const modal = document.getElementById('prepayModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePrepayModal() {
+      const modal = document.getElementById('prepayModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (prepayTimerInterval) {
+        clearInterval(prepayTimerInterval);
+        prepayTimerInterval = null;
+      }
+      currentPrepay = null;
+    }
+
+    document.getElementById('prepayModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closePrepayModal();
+      }
+    });
+
+    // Отправка предоплаты на сервер
+    document.getElementById('prepayForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!currentPrepay) return;
+
+      const btn = document.getElementById('prepaySubmitBtn');
+      const message = document.getElementById('prepayMessage');
+      const method = currentPrepayMethod;
+
+      // Валидация зависит от выбранного способа оплаты
+      if (method === 'card') {
+        const card = document.getElementById('prepayCard').value.replace(/\s/g, '');
+        const expiry = document.getElementById('prepayExpiry').value.trim();
+        const cvc = document.getElementById('prepayCvc').value.trim();
+        const cardholder = document.getElementById('prepayCardholder').value.trim();
+
+        if (!/^\d{13,19}$/.test(card)) {
+          message.style.color = '#c62828';
+          message.textContent = 'Введите корректный номер карты (13–19 цифр)';
+          return;
+        }
+        if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+          message.style.color = '#c62828';
+          message.textContent = 'Срок действия в формате ММ/ГГ';
+          return;
+        }
+        if (!/^\d{3,4}$/.test(cvc)) {
+          message.style.color = '#c62828';
+          message.textContent = 'Введите CVC (3–4 цифры)';
+          return;
+        }
+        if (!cardholder) {
+          message.style.color = '#c62828';
+          message.textContent = 'Введите имя держателя карты';
+          return;
+        }
+      }
+      // Для ЕРИП реквизиты не вводятся — пользователь сам оплачивает по коду
+
+      btn.disabled = true;
+      btn.textContent = method === 'erip' ? 'Проверяем оплату...' : 'Обработка платежа...';
+      message.textContent = '';
+      message.style.color = '';
+
+      try {
+        const response = await fetch('/api/prepayment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: currentPrepay.id, method: method })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          message.style.color = '#2e7d32';
+          message.textContent = result.message || 'Предоплата внесена!';
+          setTimeout(() => {
+            closePrepayModal();
+            const userData = localStorage.getItem(USER_STORAGE_KEY);
+            if (userData) {
+              const user = JSON.parse(userData);
+              loadUserBookings(user.email);
+            }
+          }, 1200);
+        } else {
+          message.style.color = '#c62828';
+          message.textContent = result.error || 'Ошибка при внесении предоплаты';
+          btn.disabled = false;
+          btn.textContent = PREPAY_BTN_LABELS[method];
+
+          // Бронь просрочена и удалена — обновляем список
+          if (response.status === 410) {
+            setTimeout(() => {
+              closePrepayModal();
+              const userData = localStorage.getItem(USER_STORAGE_KEY);
+              if (userData) {
+                const user = JSON.parse(userData);
+                loadUserBookings(user.email);
+              }
+            }, 2000);
+          }
+        }
+      } catch (error) {
+        console.error('Error prepaying:', error);
+        message.style.color = '#c62828';
+        message.textContent = 'Ошибка соединения. Попробуйте позже.';
+        btn.disabled = false;
+        btn.textContent = PREPAY_BTN_LABELS[method];
+      }
+    });
 
     // Обновление статистики
     function updateStats(bookings) {
       const total = bookings.length;
-      const active = bookings.filter(b => b.status === 'new' || b.status === 'confirmed' || b.status === 'pending').length;
+      const active = bookings.filter(b => b.status === 'new' || b.status === 'confirmed' || b.status === 'pending' || b.status === 'prepaid').length;
       const completed = bookings.filter(b => b.status === 'completed').length;
       
       document.getElementById('bookingCount').textContent = total;
@@ -927,5 +1562,6 @@
       }
     });
   </script>
+  <script src="site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тур — Вандралюбы</title>
+  <meta name="description" content="Подробная информация о туре и запись на тур от турагентства Вандралюбы.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: hsl(33, 38%, 49%);
+      --primary-fg: #ffffff;
+      --foreground: hsl(0, 0%, 13%);
+      --muted: hsl(30, 10%, 94%);
+      --muted-fg: hsl(0, 0%, 40%);
+      --border: hsl(30, 15%, 85%);
+      --footer-bg: hsl(0, 0%, 15%);
+      --footer-fg: hsl(0, 0%, 80%);
+      --bg: #ffffff;
+      --font-display: 'PT Serif', serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+    body {
+      font-family: var(--font-body);
+      color: var(--foreground);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 { font-family: var(--font-display); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 20px 0;
+    }
+    /* Логотип + ссылка "назад" в одну колонку (стили хедера — в site.css) */
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-title {
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-family: var(--font-display);
+    }
+    .logo-sub { color: rgba(255,255,255,0.7); font-size: 11px; }
+    .nav { display: flex; align-items: center; gap: 40px; }
+    .nav a {
+      color: rgba(229, 227, 227, 0.9);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav a:hover, .nav a.active { color: white; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .phone-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50px;
+      padding: 8px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    .phone-btn:hover { background: rgba(255,255,255,0.1); }
+    .phone-btn svg { width: 14px; height: 14px; }
+    .arrow-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      background: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .arrow-btn:hover { background: rgba(255,255,255,0.1); }
+    .arrow-btn svg { width: 16px; height: 16px; }
+
+    /* ===== HERO (на весь экран) ===== */
+    .tour-hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      background: #2b2b2b center/cover no-repeat;
+      padding-bottom: clamp(2.5rem, 6vh, 5rem);
+    }
+    .tour-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.35) 100%);
+    }
+    .tour-hero .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding-top: 8rem;
+      padding-bottom: 0.5rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.85);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+    .tour-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-family: var(--font-body);
+    }
+    .tour-hero h1 {
+      color: #fff;
+      font-size: clamp(2.25rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      max-width: none;
+      margin-bottom: 1rem;
+      text-wrap: balance;
+    }
+    .tour-hero .tour-route {
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      margin-bottom: 2rem;
+    }
+    .tour-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.25);
+      padding-top: 1.5rem;
+    }
+    .tour-hero .price {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.75rem);
+      font-weight: 700;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--primary-fg);
+      color: var(--foreground);
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+      transition: opacity 0.2s;
+    }
+    .hero-cta:hover { opacity: 0.9; }
+
+    /* ===== FACTS ===== */
+    .facts {
+      background: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding: 1.75rem 0;
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .fact .fact-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-fg);
+      margin-bottom: 4px;
+    }
+    .fact .fact-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--foreground);
+    }
+
+    /* ===== CONTENT ===== */
+    .tour-content { padding: 3.5rem 0; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .tour-content h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .tour-content p { color: var(--muted-fg); margin-bottom: 1rem; line-height: 1.7; }
+    .block { margin-bottom: 2.5rem; }
+    .highlights { list-style: none; }
+    .highlights li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+    .highlights li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .plain-list { list-style: none; }
+    .plain-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
+      color: var(--muted-fg);
+      font-size: 0.95rem;
+    }
+    .plain-list.included li::before { content: '●'; position: absolute; left: 0; color: #2e7d32; font-size: 0.7rem; top: 4px; }
+    .plain-list.excluded li::before { content: '✕'; position: absolute; left: 0; color: #c62828; font-size: 0.85rem; }
+
+    /* Боковая карточка */
+    .side-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      position: sticky;
+      top: 1.5rem;
+      align-self: start;
+    }
+    .side-card .side-price {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .side-card .side-date { color: var(--primary); font-weight: 600; font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .side-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .side-row .k { color: var(--muted-fg); }
+    .side-row .v { font-weight: 500; text-align: right; }
+    .side-card .hero-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 1.25rem;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 20px;
+    }
+
+    /* ===== FORM (как на главной) ===== */
+    .contact { background: var(--muted); padding: 5rem 0; }
+    .contact h2 { text-align: center; font-size: clamp(1.5rem, 2.5vw, 1.875rem); font-weight: 700; margin-bottom: 2.5rem; }
+    .contact-form { max-width: 800px; margin: 0 auto; }
+    .form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 0.25rem; padding: 0.75rem 1rem; font-size: 0.875rem;
+      font-family: var(--font-body); color: var(--foreground);
+      outline: none; transition: box-shadow 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { box-shadow: 0 0 0 3px hsla(33,38%,49%,0.3); }
+    .contact-form textarea { resize: none; margin-bottom: 1rem; }
+    .form-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.5rem; }
+    .submit-btn {
+      background: var(--primary); color: var(--primary-fg); border: none;
+      padding: 0.875rem 3rem; border-radius: 9999px; font-size: 1rem; font-weight: 500;
+      cursor: pointer; transition: opacity 0.2s; font-family: var(--font-body);
+    }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .consent { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-fg); cursor: pointer; }
+    .consent input { width: 16px; height: 16px; }
+    .consent span { text-decoration: underline; }
+    .selected-tour-info {
+      background: #fdf8f0;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--foreground);
+    }
+    .selected-tour-info strong { color: var(--primary); }
+    .auth-info {
+      background: hsla(33, 50%, 95%, 0.7);
+      border: 1px solid hsl(33, 38%, 49%);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: hsl(33, 38%, 30%);
+      display: none;
+    }
+    .auth-info .user-email { font-weight: 600; }
+
+    /* ===== NOT FOUND ===== */
+    .not-found {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .not-found h1 { font-size: 2rem; margin-bottom: 1rem; }
+    .not-found p { color: var(--muted-fg); margin-bottom: 1.5rem; }
+    .not-found a {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer { background: var(--footer-bg); color: var(--footer-fg); padding: 4rem 0; }
+    .footer-logo { display: flex; justify-content: center; margin-bottom: 2.5rem; }
+    .footer-logo-inner { display: flex; align-items: center; gap: 3px; }
+    .footer-logo-text { font-weight: 700; letter-spacing: 2px; font-size: 0.875rem; font-family: var(--font-display); }
+    .footer-logo-sub { color: rgba(204,204,204,0.6); font-size: 0.75rem; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      font-size: 0.875rem;
+      color: rgba(204,204,204,0.7);
+    }
+    .footer-grid .label { font-weight: 500; color: var(--footer-fg); margin-bottom: 0.75rem; }
+    .footer-grid a { color: rgba(204,204,204,0.7); text-decoration: none; transition: color 0.2s; line-height: 1.8; }
+    .footer-grid a:hover { color: var(--footer-fg); }
+    .footer-grid p { line-height: 1.8; margin: 0; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      /* Чтобы шапка не сжималась: убираем телефон, уменьшаем отступы в меню */
+      .phone-btn { display: none; }
+      .nav { gap: 22px; flex-shrink: 0; }
+    }
+    @media (max-width: 900px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .facts-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .side-card { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .header .container { flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+      .nav, .header-right { margin-top: 0; }
+      .header-left { gap: 6px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-actions { flex-direction: column; align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1.25rem; }
+      .tour-hero h1 { font-size: clamp(1.75rem, 8vw, 2.75rem); }
+    }
+  </style>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="header-left">
+        <a href="index.html" class="logo">
+          <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+          <div class="logo-text">
+            <div class="logo-title">ВАНДРАЛЮБЫ</div>
+            <div class="logo-sub">Турагентство</div>
+          </div>
+        </a>
+        <!-- Назад к блоку "Популярные предложения" -->
+        <a href="index.html#tours" class="back-link">← Ко всем предложениям</a>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="about.html">Вандралюбы</a>
+        <a href="catalog.html" class="active">Каталог</a>
+        <a href="travelers.html">Туристам</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+      <div class="header-right">
+        <a href="tel:+375292451770" class="phone-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          тел. +375 29 245 17 70
+        </a>
+        <a href="login.html" id="authLink">
+          <button class="arrow-btn" id="authBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO ТУРА -->
+  <section class="tour-hero" id="tourHero">
+    <div class="container">
+      <div id="heroBadgeWrap"></div>
+      <h1 id="tourTitle">Загрузка...</h1>
+      <div class="tour-route" id="tourRoute"></div>
+      <div class="tour-hero-actions">
+        <div class="price" id="tourPrice"></div>
+        <button class="hero-cta" onclick="scrollToBooking()">Записаться на тур</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- КЛЮЧЕВЫЕ ФАКТЫ -->
+  <section class="facts">
+    <div class="container">
+      <div class="facts-grid">
+        <div class="fact"><div class="fact-label">Длительность</div><div class="fact-value" id="factDuration">—</div></div>
+        <div class="fact"><div class="fact-label">Дата выезда</div><div class="fact-value" id="factDate">—</div></div>
+        <div class="fact"><div class="fact-label">Группа</div><div class="fact-value" id="factGroup">—</div></div>
+        <div class="fact"><div class="fact-label">Сложность</div><div class="fact-value" id="factDifficulty">—</div></div>
+        <div class="fact"><div class="fact-label">Стоимость</div><div class="fact-value" id="factPrice">—</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОДРОБНОЕ ОПИСАНИЕ -->
+  <section class="tour-content">
+    <div class="container">
+      <div class="content-grid">
+        <div>
+          <div class="block">
+            <h2>О туре</h2>
+            <div id="tourDescription"></div>
+          </div>
+
+          <div class="block">
+            <h2>Что вас ждёт</h2>
+            <ul class="highlights" id="tourHighlights"></ul>
+          </div>
+
+          <div class="block two-col">
+            <div>
+              <h2>Включено в стоимость</h2>
+              <ul class="plain-list included" id="tourIncludes"></ul>
+            </div>
+            <div>
+              <h2>Не включено</h2>
+              <ul class="plain-list excluded" id="tourExcludes"></ul>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-card">
+          <div class="side-price" id="sidePrice">—</div>
+          <div class="side-date" id="sideDate">—</div>
+          <div class="side-row"><span class="k">Маршрут</span><span class="v" id="sideRoute">—</span></div>
+          <div class="side-row"><span class="k">Длительность</span><span class="v" id="sideDuration">—</span></div>
+          <div class="side-row"><span class="k">Группа</span><span class="v" id="sideGroup">—</span></div>
+          <div class="side-row"><span class="k">Сложность</span><span class="v" id="sideDifficulty">—</span></div>
+          <div class="side-row"><span class="k">Регистрация</span><span class="v">открыта</span></div>
+          <button class="hero-cta" onclick="scrollToBooking()">Записаться на тур</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФОРМА ЗАПИСИ (как на главной странице) -->
+  <section class="contact" id="booking">
+    <div class="container">
+      <h2>Запишитесь на тур «<span id="bookingTourTitle">—</span>»</h2>
+      <form class="contact-form" id="bookingForm">
+        <!-- Блок с выбранным туром -->
+        <div id="selectedTourInfo" class="selected-tour-info">
+          Выбран тур: <strong id="selectedTourName">—</strong>
+          (<span id="selectedTourDate">—</span>)
+        </div>
+
+        <!-- Информация об авторизованном пользователе -->
+        <div id="authInfo" class="auth-info">
+          Вы авторизованы как <span class="user-email" id="authUserEmail">user@example.com</span>
+          <br><span style="font-size: 0.85rem;">При необходимости можете изменить внесенные данные</span>
+        </div>
+
+        <div class="form-row">
+          <input type="text" id="userName" placeholder="Ваше имя" required>
+          <input type="tel" id="userPhone" placeholder="Телефон" required>
+          <input type="email" id="userEmail" placeholder="E-mail" required>
+        </div>
+        <textarea rows="4" id="userComment" placeholder="Комментарий.."></textarea>
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" id="submitBtn">Отправить заявку</button>
+          <label class="consent">
+            <input type="checkbox" id="consentCheckbox" required>
+            <span>Согласие на обработку персональных данных</span>
+          </label>
+        </div>
+        <div id="formMessage" style="margin-top: 15px; display: none;"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <div class="footer-logo-inner">
+           <div><img src="logo.png" width="40px" height="35px" alt="logo"></div>
+        <div>
+            <div class="footer-logo-text">Вандралюбы</div>
+            <div class="footer-logo-sub">Турагентство</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-grid">
+        <!-- Столбец 1: Меню -->
+        <div>
+          
+          <a href="index.html">Главная</a><br>
+          <a href="about.html">Вандралюбы</a><br>
+          <a href="catalog.html">Каталог</a><br>
+          <a href="travelers.html">Туристам</a><br>
+          <a href="contacts.html">Контакты</a><br>
+          <a href="login.html">Вход в личный кабинет</a>
+        </div>
+        <!-- Столбец 2: Контакты -->
+        <div>
+          <p class="label">Свяжитесь с нами</p>
+          <a href="tel:+375292451770">тел. +375 29 245 17 70</a><br>
+          <a href="mailto:vandraluby@gmail.com">e-mail: vandraluby@gmail.com</a>
+        </div>
+        <!-- Столбец 3: Адрес и график работы -->
+        <div>
+          <p class="label">Адрес</p>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0,+15" target="_blank">г. Минск, ул. Ленина, 15</a><br>
+          <a href="https://maps.google.com/maps?q=%D0%B3.+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D1%83%D0%BB.+%D0%A0%D0%B0%D1%82%D0%BE%D0%BC%D1%81%D0%BA%D0%B0%D1%8F,+7" target="_blank">г. Минск, ул. Ратомская, 7</a>
+          <p style="margin-top: 8px; color: rgba(204,204,204,0.6); font-size: 0.8rem;">🕐 График работы:<br>Пн–Пт: 10:00 – 18:00</p>
+        </div>
+        <!-- Столбец 4: О компании -->
+        <div>
+          <p class="label">О компании</p>
+          <p>ЧУП «Вандралюбы»</p>
+          <p>© 2026. Все права защищены</p>
+          <a href="#">Политика конфиденциальности</a>
+        </div>
+      </div>
+      <!-- Кнопка "Наверх" (справа внизу) -->
+      <div class="footer-bottom">
+        <button type="button" class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Наверх">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          Наверх
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="tours-data.js"></script>
+  <script>
+    // Ключ для хранения данных пользователя
+    const USER_STORAGE_KEY = 'user';
+
+    // Текущий тур (загружается из ?id=)
+    let currentTour = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const tourId = params.get('id') || params.get('tour');
+      currentTour = findTour(tourId);
+
+      if (!currentTour) {
+        showNotFound();
+        return;
+      }
+
+      renderTour(currentTour);
+      updateBackLink(currentTour);
+      updateHeaderButton();
+      updateBookingForm();
+    });
+
+    // Если тур из каталога — ссылка "назад" ведёт в каталог
+    function updateBackLink(tour) {
+      const fromCatalog = typeof CATALOG_TOURS !== 'undefined'
+        && CATALOG_TOURS.some(t => t.id === tour.id);
+      if (!fromCatalog) return;
+
+      const backLink = document.querySelector('.back-link');
+      if (!backLink) return;
+      backLink.href = 'catalog.html';
+      backLink.textContent = '← Ко всем турам каталога';
+    }
+
+    // Отрисовка данных тура на странице
+    function renderTour(tour) {
+      document.title = `${tour.title} — Вандралюбы`;
+
+      // Hero
+      document.getElementById('tourHero').style.backgroundImage = `url('${tour.image}')`;
+      document.getElementById('tourTitle').textContent = tour.title;
+      document.getElementById('tourRoute').textContent = tour.route;
+      document.getElementById('tourPrice').textContent = tour.price;
+
+      if (tour.badge) {
+        document.getElementById('heroBadgeWrap').innerHTML = `<span class="tour-badge">${escapeHtml(tour.badge)}</span>`;
+      }
+
+      // Факты
+      document.getElementById('factDuration').textContent = tour.duration;
+      document.getElementById('factDate').textContent = tour.dateDisplay;
+      document.getElementById('factGroup').textContent = tour.group;
+      document.getElementById('factDifficulty').textContent = tour.difficulty;
+      document.getElementById('factPrice').textContent = tour.price;
+
+      // Описание
+      document.getElementById('tourDescription').innerHTML =
+        (tour.description || []).map(p => `<p>${escapeHtml(p)}</p>`).join('');
+
+      // Что вас ждёт
+      document.getElementById('tourHighlights').innerHTML =
+        (tour.highlights || []).map(h => `<li>${escapeHtml(h)}</li>`).join('');
+
+      // Включено / не включено
+      document.getElementById('tourIncludes').innerHTML =
+        (tour.includes || []).map(i => `<li>${escapeHtml(i)}</li>`).join('');
+      document.getElementById('tourExcludes').innerHTML =
+        (tour.excludes || []).map(i => `<li>${escapeHtml(i)}</li>`).join('');
+
+      // Боковая карточка
+      document.getElementById('sidePrice').textContent = tour.price;
+      document.getElementById('sideDate').textContent = 'Выезд: ' + tour.dateDisplay;
+      document.getElementById('sideRoute').textContent = tour.route;
+      document.getElementById('sideDuration').textContent = tour.duration;
+      document.getElementById('sideGroup').textContent = tour.group;
+      document.getElementById('sideDifficulty').textContent = tour.difficulty;
+
+      // Форма записи — тур уже выбран
+      document.getElementById('bookingTourTitle').textContent = tour.title;
+      document.getElementById('selectedTourInfo').style.display = 'block';
+      document.getElementById('selectedTourName').textContent = tour.title;
+      document.getElementById('selectedTourDate').textContent = tour.dateDisplay;
+    }
+
+    // Тур не найден
+    function showNotFound() {
+      document.title = 'Тур не найден — Вандралюбы';
+      document.body.innerHTML = `
+        <div class="not-found">
+          <h1>Тур не найден</h1>
+          <p>Возможно, ссылка устарела. Вернитесь на главную страницу и выберите тур из блока «Популярные предложения».</p>
+          <a href="index.html#tours">К популярным предложениям</a>
+        </div>
+      `;
+    }
+
+    // Безопасная вставка текста
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Прокрутка к форме записи
+    function scrollToBooking() {
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Проверка авторизации
+    function checkAuth() {
+      const userData = localStorage.getItem(USER_STORAGE_KEY);
+      if (userData) {
+        try {
+          JSON.parse(userData);
+          return true;
+        } catch (e) {
+          localStorage.removeItem(USER_STORAGE_KEY);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    // Получение данных пользователя
+    function getUserData() {
+      const userData = localStorage.getItem(USER_STORAGE_KEY);
+      if (userData) {
+        try {
+          return JSON.parse(userData);
+        } catch (e) {
+          return null;
+        }
+      }
+      return null;
+    }
+
+    // Обновление кнопки в хедере
+    function updateHeaderButton() {
+      const authLink = document.getElementById('authLink');
+      const authBtn = document.getElementById('authBtn');
+      const user = getUserData();
+
+      if (user) {
+        authLink.href = 'cabinet.html';
+        authBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        `;
+        authBtn.style.borderColor = 'var(--primary)';
+      } else {
+        authLink.href = 'login.html';
+        authBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        `;
+        authBtn.style.borderColor = 'rgba(255,255,255,0.4)';
+      }
+    }
+
+    // Обновление формы записи в зависимости от авторизации
+    function updateBookingForm() {
+      const user = getUserData();
+      const nameInput = document.getElementById('userName');
+      const phoneInput = document.getElementById('userPhone');
+      const emailInput = document.getElementById('userEmail');
+      const authInfo = document.getElementById('authInfo');
+      const authUserEmail = document.getElementById('authUserEmail');
+
+      if (user) {
+        authInfo.style.display = 'block';
+        authUserEmail.textContent = user.email || 'user@example.com';
+
+        nameInput.value = user.name || '';
+        emailInput.value = user.email || '';
+        phoneInput.value = user.phone || '';
+
+        nameInput.placeholder = 'Ваше имя (можно изменить)';
+        emailInput.placeholder = 'E-mail (можно изменить)';
+        phoneInput.placeholder = 'Телефон (можно изменить)';
+
+        nameInput.required = true;
+        emailInput.required = true;
+        phoneInput.required = true;
+      } else {
+        authInfo.style.display = 'none';
+
+        nameInput.value = '';
+        emailInput.value = '';
+        phoneInput.value = '';
+
+        nameInput.placeholder = 'Ваше имя';
+        emailInput.placeholder = 'E-mail';
+        phoneInput.placeholder = 'Телефон';
+
+        nameInput.required = true;
+        emailInput.required = true;
+        phoneInput.required = true;
+      }
+    }
+
+    // Отправка записи на тур
+    async function submitBooking(event) {
+      event.preventDefault();
+
+      if (!currentTour) return;
+
+      const name = document.getElementById('userName').value.trim();
+      const phone = document.getElementById('userPhone').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const comment = document.getElementById('userComment').value.trim();
+      const consent = document.getElementById('consentCheckbox').checked;
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+
+      if (!consent) {
+        formMessage.style.display = 'block';
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Пожалуйста, дайте согласие на обработку персональных данных';
+        return;
+      }
+
+      if (!name || !phone || !email) {
+        formMessage.style.display = 'block';
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Пожалуйста, заполните имя, телефон и email';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+      formMessage.style.display = 'block';
+      formMessage.style.color = '#666';
+      formMessage.textContent = 'Отправляем заявку...';
+
+      try {
+        const fullComment = comment
+          ? `${comment}\nТур: ${currentTour.title}`
+          : `Тур: ${currentTour.title}`;
+
+        const response = await fetch('/api/booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            email: email,
+            tourDate: currentTour.date,
+            comment: fullComment,
+            price: currentTour.price || ''
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          formMessage.style.color = 'green';
+          formMessage.textContent = 'Заявка успешно отправлена! Вы увидите её в личном кабинете.';
+          document.getElementById('bookingForm').reset();
+
+          // Восстанавливаем блок с выбранным туром и данные пользователя
+          document.getElementById('selectedTourInfo').style.display = 'block';
+          document.getElementById('selectedTourName').textContent = currentTour.title;
+          document.getElementById('selectedTourDate').textContent = currentTour.dateDisplay;
+          updateBookingForm();
+        } else {
+          formMessage.style.color = 'red';
+          formMessage.textContent = result.error || 'Ошибка при отправке. Попробуйте ещё раз.';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Ошибка соединения. Пожалуйста, попробуйте позже.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+      }
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', submitBooking);
+  </script>
+</body>
+</html>

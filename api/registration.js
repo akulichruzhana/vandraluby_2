@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
       return res.status(400).json({ success: false, error: 'Все поля обязательны' });
     }
 
-    const nameRegex = /^[A-Za-zА-Яа-я\s\-]+$/;
+    const nameRegex = /^[\p{L}\s\-]+$/u;
     if (!nameRegex.test(name) || !nameRegex.test(surname)) {
       return res.status(400).json({ success: false, error: 'Имя и фамилия должны содержать только буквы' });
     }
