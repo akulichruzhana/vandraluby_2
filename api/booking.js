@@ -19,25 +19,12 @@ const HOLD_MINUTES = 30;
 // Добавляем недостающие колонки (идемпотентно, один раз на холодный старт)
 let schemaReady = false;
 
-
 async function ensureSchema() {
   if (schemaReady) return;
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS bookings (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      phone VARCHAR(50) NOT NULL,
-      email VARCHAR(255) NOT NULL,
-      tour_date VARCHAR(100),
-      comment TEXT,
-      price TEXT,
-      status VARCHAR(50) DEFAULT 'new',
-      prepayment_amount NUMERIC,
-      prepayment_at TIMESTAMPTZ,
-      expires_at TIMESTAMPTZ,
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
-  `);
+  await pool.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS price TEXT`);
+  await pool.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS prepayment_amount NUMERIC`);
+  await pool.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS prepayment_at TIMESTAMPTZ`);
+  await pool.query(`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS expires_at TIMESTAMPTZ`);
   schemaReady = true;
 }
 
